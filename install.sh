@@ -7,10 +7,10 @@ wget https://raw.githubusercontent.com/88n77/Logo-88n77/main/logo.sh
 chmod +x logo.sh
 ./logo.sh
 
-setup_url=""
-update_url=""
-delete_url=""
-points_url=""  
+setup_url="https://raw.githubusercontent.com/88n77NODES/pipe_network/main/setup.sh"
+update_url="https://raw.githubusercontent.com/88n77NODES/pipe_network/main/updatee.sh"
+delete_url="https://raw.githubusercontent.com/88n77NODES/pipe_network/main/deleted.sh"
+points_url="https://raw.githubusercontent.com/88n77NODES/pipe_network/main/point.sh"  
 
 menu_options=("Встановити" "Оновити" "Видалити" "Перевірити поїнти" "Вийти")
 PS3='Оберіть дію: '
@@ -32,7 +32,7 @@ do
             ;;
         "Перевірити поїнти")
             echo -e "${green}Перевірка поїнтів...${nc}"
-            bash <(curl -s $points_url)  # Виконання скрипту перевірки поїнтів
+            bash <(curl -s $points_url)  
             ;;
         "Вийти")
             echo -e "${green}Вихід...${nc}"
