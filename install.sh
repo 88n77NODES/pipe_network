@@ -7,6 +7,12 @@ wget https://raw.githubusercontent.com/88n77/Logo-88n77/main/logo.sh
 chmod +x logo.sh
 ./logo.sh
 
+echo -e "${green}Оновлення${nc}"
+
+sudo apt update -y && sudo apt upgrade -y
+sudo apt install curl -y
+sudo apt install bc -y
+
 setup_url="https://raw.githubusercontent.com/88n77NODES/pipe_network/main/setup.sh"
 update_url="https://raw.githubusercontent.com/88n77NODES/pipe_network/main/updatee.sh"
 delete_url="https://raw.githubusercontent.com/88n77NODES/pipe_network/main/deleted.sh"

@@ -6,11 +6,6 @@ nc='\033[0m'
 
 echo -e "${green}Встановлення ноди Pipe...${nc}"
 
-sudo apt update -y && sudo apt upgrade -y
-sudo apt install curl -y
-sudo apt install bc -y
-sleep 1
-
 cho -e "${green}Створення необхідних папок${nc}" 
 mkdir -p $HOME/pipenetwork
 mkdir -p $HOME/pipenetwork/download_cache
