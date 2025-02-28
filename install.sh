@@ -8,7 +8,7 @@ chmod +x logo.sh
 ./logo.sh
 
 echo -e "${green}Оновлення${nc}"
-sleep 2
+sleep 4
 sudo apt update -y && sudo apt upgrade -y
 sudo apt install curl -y
 sudo apt install bc -y
