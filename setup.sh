@@ -18,42 +18,42 @@ if ! command -v iptables &> /dev/null; then
 sudo apt update && sudo apt install -y iptables
 fi
 
-    sudo apt update
-    sudo apt install -y iptables-persistent
+sudo apt update
+   sudo apt install -y iptables-persistent
     
 
     sudo mkdir -p /opt/popcache && cd /opt/popcache
 
 
-    echo -e "${YELLOW}Впишіть ваший invite-код:${NC}"
-    read INVITE
+echo -e "${YELLOW}Впишіть ваший invite-код:${NC}"
+read INVITE
     
-    echo -e "${YELLOW}Ім'я ноди:${NC}"
-    read POP_NODE
+echo -e "${YELLOW}Ім'я ноди:${NC}"
+read POP_NODE
 
-    echo -e "${YELLOW}UserNAME${NC}"
-    read POP_NAME
+echo -e "${YELLOW}UserNAME${NC}"
+read POP_NAME
     
-    echo -e "${YELLOW} Telegram-user (без @):${NC}"
-    read TELEGRAM
+echo -e "${YELLOW} Telegram-user (без @):${NC}"
+read TELEGRAM
     
-    echo -e "${YELLOW} Discord-user:${NC}"
-    read DISCORD
+echo -e "${YELLOW} Discord-user:${NC}"
+read DISCORD
 
-    echo -e "${YELLOW}Посилання на ваш Github або Twiiter... :${NC}"
-    read WEBSITE
+echo -e "${YELLOW}Посилання на ваш Github або Twiiter... :${NC}"
+read WEBSITE
     
-    echo -e "${YELLOW}Ваш email:${NC}"
-    read EMAIL
+echo -e "${YELLOW}Ваш email:${NC}"
+read EMAIL
     
-    echo -e "${YELLOW}Адреса гаманця Solana:${NC}"
-    read SOLANA_PUBKEY
+echo -e "${YELLOW}Адреса гаманця Solana:${NC}"
+read SOLANA_PUBKEY
     
-    eecho -e "${yellow}Введіть обсяг оперативної памʼяті (лише число в GB, напр., 6 або 8):${nc}"
-    read RAM_GB
+eecho -e "${yellow}Введіть обсяг оперативної памʼяті (лише число в GB, напр., 6 або 8):${nc}"
+read RAM_GB
     
-    echo -e "${yellow}Введіть максимальний розмір кешу на диску (лише число в GB, напр., 250):${nc}"
-    read DISK_GB
+echo -e "${yellow}Введіть максимальний розмір кешу на диску (лише число в GB, напр., 250):${nc}"
+read DISK_GB
 
     
     response=$(curl -s http://ip-api.com/json)
