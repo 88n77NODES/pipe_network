@@ -19,10 +19,10 @@ sudo apt update && sudo apt install -y iptables
 fi
 
 sudo apt update
-   sudo apt install -y iptables-persistent
+sudo apt install -y iptables-persistent
     
 
-    sudo mkdir -p /opt/popcache && cd /opt/popcache
+sudo mkdir -p /opt/popcache && cd /opt/popcache
 
 
 echo -e "${YELLOW}Впишіть ваший invite-код:${NC}"
@@ -56,16 +56,16 @@ echo -e "${yellow}Введіть максимальний розмір кешу 
 read DISK_GB
 
     
-    response=$(curl -s http://ip-api.com/json)
+response=$(curl -s http://ip-api.com/json)
     
    
-    country=$(echo "$response" | jq -r '.country')
-    city=$(echo "$response" | jq -r '.city')
+country=$(echo "$response" | jq -r '.country')
+city=$(echo "$response" | jq -r '.city')
     
-    POP_LOCATION="$city, $country"
+POP_LOCATION="$city, $country"
 
     
-    sudo bash -c 'cat > /etc/sysctl.d/99-popcache.conf << EOL
+sudo bash -c 'cat > /etc/sysctl.d/99-popcache.conf << EOL
 net.ipv4.ip_local_port_range = 1024 65535
 net.core.somaxconn = 65535
 net.ipv4.tcp_low_latency = 1
@@ -77,29 +77,29 @@ net.ipv4.tcp_rmem = 4096 87380 16777216
 net.core.wmem_max = 16777216
 net.core.rmem_max = 16777216
 EOL'
-    sudo sysctl -p /etc/sysctl.d/99-popcache.conf
+sudo sysctl -p /etc/sysctl.d/99-popcache.conf
 
     
-    sudo bash -c 'cat > /etc/security/limits.d/popcache.conf << EOL
+sudo bash -c 'cat > /etc/security/limits.d/popcache.conf << EOL
 *    hard nofile 65535
 *    soft nofile 65535
 EOL'
 
     
-    ARCH=$(uname -m)
-    if [[ "$ARCH" == "x86_64" ]]; then
-      URL="https://download.pipe.network/static/pop-v0.3.0-linux-x64.tar.gz"
-    else
-      URL="https://download.pipe.network/static/pop-v0.3.0-linux-arm64.tar.gz"
-    fi
-    wget -q "$URL" -O pop.tar.gz
-    tar -xzf pop.tar.gz && rm pop.tar.gz
-    chmod +x pop
-    chmod 755 /opt/popcache/pop
+ARCH=$(uname -m)
+if [[ "$ARCH" == "x86_64" ]]; then
+URL="https://download.pipe.network/static/pop-v0.3.0-linux-x64.tar.gz"
+else
+URL="https://download.pipe.network/static/pop-v0.3.0-linux-arm64.tar.gz"
+fi
+wget -q "$URL" -O pop.tar.gz
+tar -xzf pop.tar.gz && rm pop.tar.gz
+chmod +x pop
+chmod 755 /opt/popcache/pop
 
 
-    MB=$(( RAM_GB * 1024 ))
-    cat > config.json <<EOL
+MB=$(( RAM_GB * 1024 ))
+cat > config.json <<EOL
 {
   "pop_name": "${POP_NODE}",
   "pop_location": "${POP_LOCATION}",
@@ -112,25 +112,25 @@ EOL'
 EOL
 
     
-    for PORT in 80 443; do
-    if sudo ss -tulpen | awk '{print $5}' | grep -q ":$PORT\$"; then
-    echo -e "${blue}🔒 Порт $PORT зайнятий. Завершуємо процес...${nc}"
-    sudo fuser -k ${PORT}/tcp
-    sleep 2
-    echo -e "${green}✅ Порт $PORT має бути звільнений.${nc}"
-    else
-    echo -e "${green}✅ Порт $PORT вже вільний.${nc}"
-  fi
+for PORT in 80 443; do
+if sudo ss -tulpen | awk '{print $5}' | grep -q ":$PORT\$"; then
+echo -e "${blue}🔒 Порт $PORT зайнятий. Завершуємо процес...${nc}"
+sudo fuser -k ${PORT}/tcp
+sleep 2
+echo -e "${green}✅ Порт $PORT має бути звільнений.${nc}"
+else
+echo -e "${green}✅ Порт $PORT вже вільний.${nc}"
+fi
 done
 
-    sudo systemctl stop apache2
-    sudo systemctl disable apache2
+sudo systemctl stop apache2
+sudo systemctl disable apache2
     
-    sudo iptables -I INPUT -p tcp --dport 443 -j ACCEPT
-    sudo iptables -I INPUT -p tcp --dport 80 -j ACCEPT
-    sudo sh -c "iptables-save > /etc/iptables/rules.v4"
+sudo iptables -I INPUT -p tcp --dport 443 -j ACCEPT
+sudo iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+sudo sh -c "iptables-save > /etc/iptables/rules.v4"
 
-    cat > Dockerfile << EOL
+cat > Dockerfile << EOL
 FROM ubuntu:24.04
 
 # Install dependensi dasar
